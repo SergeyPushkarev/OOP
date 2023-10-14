@@ -15,7 +15,7 @@ public class GenBox<T> {
     }
 
     public Integer returnIntegerPart() {
-        return Integer.parseInt(this.obj.toString());
+        return (int) Double.parseDouble(this.obj.toString());
     }
     public Double returnDouble() {
         return Double.parseDouble(this.obj.toString());
@@ -65,7 +65,6 @@ public class GenBox<T> {
             double fullValue = returnDouble();
 
             result = returnBinary(intPartTemp);
-
             StringBuilder floatResult = new StringBuilder();
             double floatPart = fullValue-intPart;
             if (floatPart != 0) {

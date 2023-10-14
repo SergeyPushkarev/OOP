@@ -12,6 +12,7 @@ public class Main {
         System.out.println("Бинарный перевод из шестнадцатиричного кода '8E' = " + calculator.binaryTranslate(new GenBox<>("8E")));
         System.out.println("Бинарный перевод из шестнадцатиричного кода '4F5B' = " + calculator.binaryTranslate(new GenBox<>("4F5B")));
         System.out.println("Бинарный перевод из десятичного кода '756' = " + calculator.binaryTranslate(new GenBox<>(756)));
-        System.out.println("Бинарный перевод из десятичного кода '89' = " + calculator.binaryTranslate(new GenBox<>(89)));
+        System.out.println("Бинарный перевод из десятичного кода '89.375' = " + calculator.binaryTranslate(new GenBox<>(89.375)));
+        System.out.println("Бинарный перевод из десятичного кода '10.0' = " + calculator.binaryTranslate(new GenBox<>(10.0)));
     }
 }
