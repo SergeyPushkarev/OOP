@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public abstract class Employee {
     String name;
-    String serviceNumber;
     String dateBirth;
+    String serviceNumber;
     Integer salary;
 
     public Employee(String name, String serviceNumber, String dateBirth, Integer salary) {

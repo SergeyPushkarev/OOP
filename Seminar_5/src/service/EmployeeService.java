@@ -1,16 +1,14 @@
 package service;
 
 import data.Analytic;
+import data.Positions;
 import data.Programmer;
 import data.Employee;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
-public class EmployeeService implements DataService {
-    Map<Integer, Employee> employeeMap = new HashMap<>();
-
+public class EmployeeService implements DataService, EmployeeTransfer {
+    List<Employee> employeeList = new ArrayList<>();
     @Override
     public Employee create() {
         Scanner scan = new Scanner(System.in);
@@ -28,18 +26,25 @@ public class EmployeeService implements DataService {
         switch (numberPost) {
             case 1 -> {
                 Programmer programmer = new Programmer(name, serviceNumber, dateBirth, salary);
-                employeeMap.put(employeeMap.size() + 1, programmer);
+                employeeList.add(programmer);
                 return programmer;
             }
             case 2 -> {
                 Analytic analytic = new Analytic(name, serviceNumber, dateBirth, salary);
-                employeeMap.put(employeeMap.size() + 1, analytic);
+                employeeList.add(analytic);
                 return analytic;
             }
         }
         return null;
     }
-
+    @Override
+    public void create(Employee employee) {
+        employeeList.add(employee);
+    }
+    @Override
+    public void remove(Employee employee) {
+        employeeList.remove(employee);
+    }
     public void edit(Employee employee) {
         Scanner scan = new Scanner(System.in);
         String newValue = "";
@@ -70,14 +75,38 @@ public class EmployeeService implements DataService {
             employee.setSalary(Integer.parseInt(newValue));
         }
     }
-
     @Override
-    public Employee getEmployee(Integer numberEmployee) {
-        return employeeMap.get(numberEmployee);
+    public Employee getEmployee() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Введите порядковый номер сотрудника: ");
+        int numberEmployee = scan.nextInt() - 1; scan.nextLine();
+        return employeeList.get(numberEmployee);
+    }
+    @Override
+    public List<Employee> getEmployeeList() {
+        return employeeList;
     }
 
     @Override
-    public Map<Integer, Employee> getEmployeeMap() {
-        return employeeMap;
+    public Employee transfer(Employee employee) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Введите порядковый номер новой должности: ");
+        int numberPost = scan.nextInt() - 1; scan.nextLine();
+        if (Objects.equals(Positions.values()[numberPost].toString(), employee.getClass().getSimpleName())) {
+            System.out.println("Вы ввели номер той же самой должности, что и сейчас у сотрудника!");
+            return null;
+        }
+
+        switch (numberPost) {
+            case 0 -> {
+                Programmer programmer = new Programmer(employee.getName(), employee.getServiceNumber(), employee.getDateBirth(), employee.getSalary());
+                return programmer;
+            }
+            case 1 -> {
+                Analytic analytic = new Analytic(employee.getName(), employee.getServiceNumber(), employee.getDateBirth(), employee.getSalary());
+                return analytic;
+            }
+        }
+        return null;
     }
 }

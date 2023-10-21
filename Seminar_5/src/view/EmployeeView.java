@@ -2,6 +2,7 @@ package view;
 
 import data.Employee;
 
+import java.util.List;
 import java.util.Map;
 
 public class EmployeeView {
@@ -20,23 +21,32 @@ public class EmployeeView {
             System.out.println("Сотрудник по этому номеру не был найден!");
         }
     }
+    public void showResultTransfer(Employee employee) {
+        if (employee != null) {
+            System.out.println("Сотрудник успешно переведен на другую должность!");
+        } else {
+            System.out.println("Сотрудника не удалось перевести на другую должность!");
+        }
+    }
     public void showMenu() {
         System.out.println("\n[Информационная система сотрудников]  \n" +
                 "Введите цифру для выбора действия или выхода: \n" +
                 "1. Добавить сотрудника \n" +
                 "2. Изменить сотрудника \n" +
-                "3. Вывести список должностей \n" +
-                "4. Вывести список сотрудников");
+                "3. Перевести сотрудника \n" +
+                "4. Вывести список должностей \n" +
+                "5. Вывести список сотрудников");
     }
-    public void readMapEmployee(Map<Integer, Employee> employeeMap) {
-        if (employeeMap.isEmpty()) {
+    public void readListEmployee(List<Employee> employeeList) {
+        if (employeeList.isEmpty()) {
             System.out.println("Список сотрудников пуст!");
             return;
         }
+        int index = 0;
         System.out.println("\nСписок сотрудников: ");
-        for (Map.Entry entry : employeeMap.entrySet()) {
-            Employee currentEmployee = (Employee) entry.getValue();
-            System.out.println(entry.getKey() + ". " + currentEmployee.getName() + ". Дата рождения: " + currentEmployee.getDateBirth() + ". Оклад: " + currentEmployee.getSalary());
+        for (Employee employee : employeeList) {
+            index++;
+            System.out.println(index + ". " + employee.getName() + ". Должность: " + employee.getClass().getSimpleName() + ". Дата рождения: " + employee.getDateBirth() + ". Оклад: " + employee.getSalary());
         }
     }
 }
