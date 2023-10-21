@@ -1,7 +1,8 @@
 package data;
 
-import java.util.Scanner;
-
+/**
+ * Принцип подстановки Барбары Лисков (Liskov’s Substitution Principle)
+ */
 public abstract class Employee {
     String name;
     String dateBirth;
@@ -14,17 +15,8 @@ public abstract class Employee {
         this.dateBirth = dateBirth;
         this.salary = salary;
     }
-
     public Employee() {
     }
-
-    public void fillData(String name, String serviceNumber, String dateBirth, Integer salary) {
-        this.name = name;
-        this.serviceNumber = serviceNumber;
-        this.dateBirth = dateBirth;
-        this.salary = salary;
-    }
-
     @Override
     public String toString() {
         return "(" + this.serviceNumber + ") " + this.name;
